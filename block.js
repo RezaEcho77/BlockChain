@@ -12,13 +12,13 @@ class Block{
         return new this(GENESIS_DATA)
     }
     static mineBlock({lastBlock , data}){
-        let hash , timeStamp;
+        const timeStamp = Date.now()
         const lastHash = lastBlock.hash;
             return new this({
                 timeStamp,
                 lastHash,
-                data : data,
-                hash
+                hash : cryptoHash(timeStamp , lastHash , data),
+                data
             })
     }
 }
