@@ -21,6 +21,7 @@ class Block{
         do{
             nonce++;
             timeStamp = Date.now();
+            difficulty = Block.AdjustDifficulty({originalBlock : lastBlock , timeStamp})
             hash = cryptoHash(timeStamp , difficulty , nonce , lastHash , data)
         }while (hash.substring(0,difficulty) !== '0'.repeat(difficulty))
             return new this({
@@ -34,6 +35,7 @@ class Block{
     }
     static AdjustDifficulty({originalBlock , timeStamp}){
         const {difficulty} = originalBlock
+        if (difficulty < 1) return 1
         if((timeStamp - originalBlock.timeStamp) > MINE_RATE) return difficulty - 1
         return difficulty + 1
     }

@@ -27,7 +27,7 @@ describe('BlockChain()' , ()=>{
                 expect(BlockChain.isValidChain(blockchain.chain)).toBe(false)
             })
         })
-        describe('when the chain deos start with the genesis block and multiple blocks' , ()=>{
+        describe('when the chain does start with the genesis block and multiple blocks' , ()=>{
             beforeEach(()=>{
                 blockchain.addBlock({data : 'one'})
                 blockchain.addBlock({data : 'two'})

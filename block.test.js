@@ -54,6 +54,10 @@ describe("Block" , ()=>{
         it("create hash " , ()=>{
             expect(minedBlock.hash.substring(0,minedBlock.difficulty)).toEqual('0'.repeat(minedBlock.difficulty))
         })
+        it("Adjust the Difficulty" , ()=>{
+            const possibleResult = [block.difficulty + 1 , block.difficulty -1]
+            expect(possibleResult.includes(minedBlock.difficulty)).toBe(true)
+        })
     })
     describe('AdjustDifficulty()' , ()=>{
         it('Raises the Difficulty for a Quickly Mined Block',() => {
@@ -67,6 +71,10 @@ describe("Block" , ()=>{
                 originalBlock : block,
                 timeStamp : block.timeStamp + MINE_RATE + 100
             }))
+        })
+        it('' , ()=>{
+            block.difficulty = -1
+            expect(Block.AdjustDifficulty({originalBlock:block,timeStamp})).toEqual(1)
         })
     })
 })
